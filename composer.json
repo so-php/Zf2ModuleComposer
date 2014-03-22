@@ -9,6 +9,9 @@
     ],
     "homepage": "https://github.com/so-php",
     "type": "zend-module",
+    "autoload": {
+        "psr-4": {"Zf2ModuleComposer\\": "src/Zf2ModuleComposer"}
+    },    
     "require": {
         "php": ">=5.3.3",
         "zendframework/zftool": "dev-master",
