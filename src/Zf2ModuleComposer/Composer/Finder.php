@@ -5,8 +5,9 @@ namespace Zf2ModuleComposer\Composer;
 
 
 use Composer\Factory;
+use Composer\IO\BaseIO;
 use Composer\IO\BufferIO;
-use Zf2InstrumentModule\Composer\Exception\ComposerJsonNotFound;
+use Zf2ModuleComposer\Composer\Exception\ComposerJsonNotFound;
 
 class Finder {
     /**
@@ -25,13 +26,12 @@ class Finder {
         putenv('COMPOSER_HOME='.dirname($path));
         $io= new BufferIO();
 
-        $composer = Factory::create($io, $path);
-        return $composer;
+        return $this->composerFactoryCreate($io, $path);
     }
 
     /**
      * @param $directory
-     * @throws \RuntimeException
+     * @throws ComposerJsonNotFound
      * @return string
      */
     protected function getPathToComposerJson($directory)
@@ -40,15 +40,48 @@ class Finder {
             throw new ComposerJsonNotFound("Could not locate composer.json");
         }
 
-        $files = scandir($directory, SCANDIR_SORT_DESCENDING);
+        $files = $this->scandir($directory, SCANDIR_SORT_DESCENDING);
         foreach ($files as $file) {
             if ($file == 'composer.json') {
                 return $directory . '/' . $file;
             } else if($file == '..'){
-                return $this->getPathToComposerJson(realpath($directory . '/..'));
+                $parentDirectory = $this->realpath($directory . '/..');
+                // realpath may always evaluate /.. as / (instead of invalid)
+                if($parentDirectory == $directory) {
+                    throw new ComposerJsonNotFound("Could not locate composer.json");
+                }
+                return $this->getPathToComposerJson($parentDirectory);
             }
         }
-
+        // if scandir does not return .. at top level we could end up here
         throw new ComposerJsonNotFound("Could not locate composer.json");
+    }
+
+    /**
+     * @param BaseIO $io
+     * @param string $path
+     * @return \Composer\Composer
+     */
+    protected function composerFactoryCreate(BaseIO $io, $path){
+        return Factory::create($io, $path);
+    }
+
+    /**
+     * For mocking
+     * @param string $directory
+     * @param int $sorting_order
+     * @return array
+     */
+    protected function scandir($directory, $sorting_order = null){
+        return scandir($directory, $sorting_order);
+    }
+
+    /**
+     * For mocking
+     * @param string $path
+     * @return string|bool
+     */
+    protected function realpath($path){
+        return realpath($path);
     }
 } 

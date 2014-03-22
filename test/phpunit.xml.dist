@@ -3,10 +3,10 @@
 <phpunit bootstrap="Bootstrap.php">
     <testsuites>
         <testsuite name="zf2-module-composer-unit-tests">
-            <directory>./Unit</directory>
+            <directory>./Zf2ModuleComposerTest/Unit</directory>
         </testsuite>
         <testsuite name="zf2-module-composer-integration-tests">
-            <directory>./Integration</directory>
+            <directory>./Zf2ModuleComposerTest/Integration</directory>
         </testsuite>
     </testsuites>
 </phpunit>
