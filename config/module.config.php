@@ -1,5 +1,10 @@
 <?php
 return array(
+    'controllers' => array(
+        'invokables' => array(
+            'Zf2ModuleComposer\Controller\IndexController' => 'Zf2ModuleComposer\Controller\IndexController',
+        ),
+    ),
     'router' => array(
         'routes' => array(
             'zf2-instrument-module' => array(
@@ -43,6 +48,12 @@ return array(
                     ),
                 )
             )
+        ),
+    ),
+
+    'view_manager' => array(
+        'template_path_stack' => array(
+            __DIR__ . '/../view',
         ),
     ),
 );
