@@ -8,6 +8,7 @@
         "composer"
     ],
     "homepage": "https://github.com/so-php",
+    "type": "zend-module",
     "require": {
         "php": ">=5.3.3",
         "zendframework/zftool": "dev-master",
