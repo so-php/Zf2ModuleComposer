@@ -17,5 +17,8 @@
         "zendframework/zftool": "dev-master",
         "composer/composer": "dev-master",
         "composer/installers": "~1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "3.7.*"
     }
 }
