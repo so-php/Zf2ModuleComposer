@@ -12,6 +12,7 @@
     "require": {
         "php": ">=5.3.3",
         "zendframework/zftool": "dev-master",
-        "composer/composer": "dev-master"
+        "composer/composer": "dev-master",
+        "composer/installers": "~1.0"
     }
 }
