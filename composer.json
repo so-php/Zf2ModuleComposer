@@ -1,0 +1,16 @@
+{
+    "name": "so-php/zf2-module-composer",
+    "description": "Zf2 Application module that exposes composer package management through a web interface",
+    "keywords": [
+        "framework",
+        "zf2",
+        "so-php",
+        "composer"
+    ],
+    "homepage": "https://github.com/so-php",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zftool": "dev-master",
+        "composer/composer": "dev-master"
+    }
+}
